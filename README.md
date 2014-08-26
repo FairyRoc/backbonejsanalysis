@@ -7,6 +7,10 @@ backbonejsanalysis
 
 Backbone基本的设置
 
+* event.js
+
+Backbone中的事件对象
+
 * view.js
 
 

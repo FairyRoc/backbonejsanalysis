@@ -5,6 +5,7 @@ backbonejsanalysis
 
 * base.js
 
+Backbone基本的设置
 
 * view.js
 

@@ -11,10 +11,11 @@ Backbone基本的设置
 
 Backbone中的事件对象
 
-* view.js
-
-
 * model.js
+
+Backbone中的Model的分析
+
+* view.js
 
 
 * collection.js

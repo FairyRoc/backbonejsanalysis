@@ -362,7 +362,7 @@
         if (!model.isNew()) model.trigger('sync', model, resp, options);
       };
 
-      //如果这个model没有传回server，则直线回调函数
+      //如果这个model没有传回server，则直接回调函数
       if (this.isNew()) {
         options.success();
         return false;

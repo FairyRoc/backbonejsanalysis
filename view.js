@@ -99,6 +99,10 @@
     // context or an element. Subclasses can override this to utilize an
     // alternative DOM manipulation API and are only required to set the
     // `this.el` property.
+    /*
+    *底层的设置view的el的方法
+    *分别设置$el和el
+    **/
     _setElement: function(el) {
       this.$el = el instanceof Backbone.$ ? el : Backbone.$(el);
       this.el = this.$el[0];
@@ -117,6 +121,9 @@
     // pairs. Callbacks will be bound to the view, with `this` set properly.
     // Uses event delegation for efficiency.
     // Omitting the selector binds the event to `this.el`.
+    /*
+    *封装委托事件的方法，传入的参数是一个相应的对象
+    **/
     delegateEvents: function(events) {
       if (!(events || (events = _.result(this, 'events')))) return this;
       this.undelegateEvents();
@@ -133,6 +140,9 @@
     // Add a single event listener to the view's element (or a child element
     // using `selector`). This only works for delegate-able events: not `focus`,
     // `blur`, and not `change`, `submit`, and `reset` in Internet Explorer.
+    /*
+    *注册一个事件再指定的元素上，不支持某些时间
+    **/
     delegate: function(eventName, selector, listener) {
       this.$el.on(eventName + '.delegateEvents' + this.cid, selector, listener);
     },
@@ -140,6 +150,9 @@
     // Clears all callbacks previously bound to the view by `delegateEvents`.
     // You usually don't need to use this, but may wish to if you have multiple
     // Backbone views attached to the same DOM element.
+    /*
+    *清除所有通过delegate绑定的事件
+    **/
     undelegateEvents: function() {
       if (this.$el) this.$el.off('.delegateEvents' + this.cid);
       return this;
@@ -147,12 +160,18 @@
 
     // A finer-grained `undelegateEvents` for removing a single delegated event.
     // `selector` and `listener` are both optional.
+    /*
+    *取消指定的委托事件
+    **/
     undelegate: function(eventName, selector, listener) {
       this.$el.off(eventName + '.delegateEvents' + this.cid, selector, listener);
     },
 
     // Produces a DOM element to be assigned to your view. Exposed for
     // subclasses using an alternative DOM manipulation API.
+    /*
+    *依据tagName创建一个DOM元素
+    **/
     _createElement: function(tagName) {
       return document.createElement(tagName);
     },
@@ -161,6 +180,9 @@
     // If `this.el` is a string, pass it through `$()`, take the first
     // matching element, and re-assign it to `el`. Otherwise, create
     // an element from the `id`, `className` and `tagName` properties.
+    /*
+    *确保一个view有一个DOM对象可以进行渲染
+    **/
     _ensureElement: function() {
       if (!this.el) {
         var attrs = _.extend({}, _.result(this, 'attributes'));
@@ -175,6 +197,9 @@
 
     // Set attributes from a hash on this view's element.  Exposed for
     // subclasses using an alternative DOM manipulation API.
+    /*
+    *设置el的属性
+    **/
     _setAttributes: function(attributes) {
       this.$el.attr(attributes);
     }

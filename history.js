@@ -6,6 +6,9 @@
   // [onhashchange](https://developer.mozilla.org/en-US/docs/DOM/window.onhashchange)
   // and URL fragments. If the browser supports neither (old IE, natch),
   // falls back to polling.
+  /*
+  *History的构造函数
+  **/
   var History = Backbone.History = function() {
     this.handlers = [];
     _.bindAll(this, 'checkUrl');
@@ -30,6 +33,9 @@
   History.started = false;
 
   // Set up all inheritable **Backbone.History** properties and methods.
+  /*
+  *扩展history的原型方法
+  **/
   _.extend(History.prototype, Events, {
 
     // The default interval to poll for hash changes, if necessary, is
@@ -44,6 +50,9 @@
 
     // In IE6, the hash fragment and search params are incorrect if the
     // fragment contains `?`.
+    /*
+    *对ie6进行正则表达式的获取
+    **/
     getSearch: function() {
       var match = this.location.href.replace(/#.*/, '').match(/\?.+/);
       return match ? match[0] : '';
@@ -51,12 +60,18 @@
 
     // Gets the true hash value. Cannot use location.hash directly due to bug
     // in Firefox where location.hash will always be decoded.
+    /*
+    *通过正则表达式，获取#之后的值
+    **/
     getHash: function(window) {
       var match = (window || this).location.href.match(/#(.*)$/);
       return match ? match[1] : '';
     },
 
     // Get the pathname and search params, without the root.
+    /*
+    *
+    **/
     getPath: function() {
       var path = decodeURI(this.location.pathname + this.getSearch());
       var root = this.root.slice(0, -1);

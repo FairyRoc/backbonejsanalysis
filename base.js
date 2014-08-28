@@ -74,4 +74,7 @@
   // `application/x-www-form-urlencoded` instead and will send the model in a
   // form param named `model`.
   Backbone.emulateJSON = false;
+
+  return Backbone;
+
 });

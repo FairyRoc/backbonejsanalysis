@@ -11,6 +11,9 @@
 
   // Creating a Backbone.View creates its initial element outside of the DOM,
   // if an existing element is not provided...
+  /*
+  *View的构造函数
+  **/
   var View = Backbone.View = function(options) {
     this.cid = _.uniqueId('view');
     options || (options = {});
@@ -33,23 +36,36 @@
 
     // jQuery delegate for element lookup, scoped to DOM elements within the
     // current view. This should be preferred to global lookups where possible.
+    /*
+    *重写$的实现
+    **/
     $: function(selector) {
       return this.$el.find(selector);
     },
 
     // Initialize is an empty function by default. Override it with your own
     // initialization logic.
+    /*
+    *初始化函数
+    **/
     initialize: function(){},
 
     // **render** is the core function that your view should override, in order
     // to populate its element (`this.el`), with the appropriate HTML. The
     // convention is for **render** to always return `this`.
+    /*
+    *render是核心的渲染函数，需要重写
+    *一般返回this，使得可以链式调用
+    **/
     render: function() {
       return this;
     },
 
     // Remove this view by taking the element out of the DOM, and removing any
     // applicable Backbone.Events listeners.
+    /*
+    *删除DOM对象，并且停止事件监听
+    **/
     remove: function() {
       this._removeElement();
       this.stopListening();
@@ -59,12 +75,18 @@
     // Remove this view's element from the document and all event listeners
     // attached to it. Exposed for subclasses using an alternative DOM
     // manipulation API.
+    /*
+    *删除元素和绑定在元素上的监听者
+    **/
     _removeElement: function() {
       this.$el.remove();
     },
 
     // Change the view's element (`this.el` property) and re-delegate the
     // view's events on the new element.
+    /*
+    *修改view绑定的DOM元素
+    **/
     setElement: function(element) {
       this.undelegateEvents();
       this._setElement(element);

@@ -70,7 +70,7 @@
 
     // Get the pathname and search params, without the root.
     /*
-    *
+    *获取url的值
     **/
     getPath: function() {
       var path = decodeURI(this.location.pathname + this.getSearch());
@@ -80,6 +80,10 @@
     },
 
     // Get the cross-browser normalized URL fragment from the path or hash.
+    /*
+    *获取fragment，如果不支持hash，则获取完整的路径
+    *否则，获取hash
+    **/
     getFragment: function(fragment) {
       if (fragment == null) {
         if (this._hasPushState || !this._wantsHashChange) {
@@ -93,6 +97,9 @@
 
     // Start the hash change handling, returning `true` if the current URL matches
     // an existing route, and `false` otherwise.
+    /*
+    *开始处理hashchange的事件
+    **/
     start: function(options) {
       if (History.started) throw new Error('Backbone.history has already been started');
       History.started = true;

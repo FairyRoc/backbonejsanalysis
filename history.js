@@ -104,7 +104,7 @@
       if (History.started) throw new Error('Backbone.history has already been started');
       History.started = true;
 
-      // Figure out the initial configuration. Do we need an iframe?
+      // Figure out the initial configuration. Do we need an iframe ?
       // Is pushState desired ... is it available?
       this.options          = _.extend({root: '/'}, this.options, options);
       this.root             = this.options.root;
@@ -115,11 +115,13 @@
       this.fragment         = this.getFragment();
 
       // Add a cross-platform `addEventListener` shim for older browsers.
+      //支持的事件监听
       var addEventListener = window.addEventListener || function (eventName, listener) {
         return attachEvent('on' + eventName, listener);
       };
 
       // Normalize root to always include a leading and trailing slash.
+      //
       this.root = ('/' + this.root + '/').replace(rootStripper, '/');
 
       // Proxy an iframe to handle location events if the browser doesn't

@@ -33,9 +33,6 @@
   History.started = false;
 
   // Set up all inheritable **Backbone.History** properties and methods.
-  /*
-  *扩展history的原型方法
-  **/
   _.extend(History.prototype, Events, {
 
     // The default interval to poll for hash changes, if necessary, is
@@ -50,9 +47,6 @@
 
     // In IE6, the hash fragment and search params are incorrect if the
     // fragment contains `?`.
-    /*
-    *对ie6进行正则表达式的获取
-    **/
     getSearch: function() {
       var match = this.location.href.replace(/#.*/, '').match(/\?.+/);
       return match ? match[0] : '';
@@ -60,18 +54,12 @@
 
     // Gets the true hash value. Cannot use location.hash directly due to bug
     // in Firefox where location.hash will always be decoded.
-    /*
-    *通过正则表达式，获取#之后的值
-    **/
     getHash: function(window) {
       var match = (window || this).location.href.match(/#(.*)$/);
       return match ? match[1] : '';
     },
 
     // Get the pathname and search params, without the root.
-    /*
-    *获取url的值
-    **/
     getPath: function() {
       var path = decodeURI(this.location.pathname + this.getSearch());
       var root = this.root.slice(0, -1);
@@ -80,10 +68,6 @@
     },
 
     // Get the cross-browser normalized URL fragment from the path or hash.
-    /*
-    *获取fragment，如果不支持hash，则获取完整的路径
-    *否则，获取hash
-    **/
     getFragment: function(fragment) {
       if (fragment == null) {
         if (this._hasPushState || !this._wantsHashChange) {
@@ -97,9 +81,6 @@
 
     // Start the hash change handling, returning `true` if the current URL matches
     // an existing route, and `false` otherwise.
-    /*
-    *开始处理hashchange的事件
-    **/
     start: function(options) {
       if (History.started) throw new Error('Backbone.history has already been started');
       History.started = true;
@@ -115,7 +96,6 @@
       this.fragment         = this.getFragment();
 
       // Add a cross-platform `addEventListener` shim for older browsers.
-      //支持的事件监听
       var addEventListener = window.addEventListener || function (eventName, listener) {
         return attachEvent('on' + eventName, listener);
       };

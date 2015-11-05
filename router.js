@@ -97,9 +97,6 @@
 
     // Convert a route string into a regular expression, suitable for matching
     // against the current location hash.
-    /*
-    *根据正则表达式，对路由进行转换
-    **/
     _routeToRegExp: function(route) {
       route = route.replace(escapeRegExp, '\\$&')
                    .replace(optionalParam, '(?:$1)?')
@@ -113,9 +110,6 @@
     // Given a route, and a URL fragment that it matches, return the array of
     // extracted decoded parameters. Empty or unmatched parameters will be
     // treated as `null` to normalize cross-browser behavior.
-    /*
-    *返回转码过后的路径
-    **/
     _extractParameters: function(route, fragment) {
       var params = route.exec(fragment).slice(1);
       return _.map(params, function(param, i) {

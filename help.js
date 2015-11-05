@@ -4,6 +4,9 @@
   // Helper function to correctly set up the prototype chain, for subclasses.
   // Similar to `goog.inherits`, but uses a hash of prototype properties and
   // class properties to be extended.
+  /*
+  *Backbone继承的实现，通过原型链进行继承的
+  **/
   var extend = function(protoProps, staticProps) {
     var parent = this;
     var child;
@@ -18,20 +21,24 @@
     }
 
     // Add static properties to the constructor function, if supplied.
+    //扩展静态的属性
     _.extend(child, parent, staticProps);
 
     // Set the prototype chain to inherit from `parent`, without calling
     // `parent`'s constructor function.
+    //原型继承，通过一个空函数，进行优化
     var Surrogate = function(){ this.constructor = child; };
     Surrogate.prototype = parent.prototype;
     child.prototype = new Surrogate;
 
     // Add prototype properties (instance properties) to the subclass,
     // if supplied.
+    //扩展原型的静态方法
     if (protoProps) _.extend(child.prototype, protoProps);
 
     // Set a convenience property in case the parent's prototype is needed
     // later.
+    //提供一个父类的原型接口，使得子类可以调用父类的方法
     child.__super__ = parent.prototype;
 
     return child;

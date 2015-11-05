@@ -178,12 +178,18 @@
 
     // Add a route to be tested when the fragment changes. Routes added later
     // may override previous routes.
+    /*
+    *当碎片改变时，增加一个新的路由在handlers中
+    **/
     route: function(route, callback) {
       this.handlers.unshift({route: route, callback: callback});
     },
 
     // Checks the current URL to see if it has changed, and if it has,
     // calls `loadUrl`, normalizing across the hidden iframe.
+    /*
+    *判断当前的url是否改变。如果改变，则触发loadUrl方法。
+    **/
     checkUrl: function(e) {
       var current = this.getFragment();
       if (current === this.fragment && this.iframe) {
@@ -197,6 +203,9 @@
     // Attempt to load the current URL fragment. If a route succeeds with a
     // match, returns `true`. If no defined routes matches the fragment,
     // returns `false`.
+    /*
+    *加载对应URL的碎片。如果成功，返回true;若失败，返回false。
+    **/
     loadUrl: function(fragment) {
       fragment = this.fragment = this.getFragment(fragment);
       return _.any(this.handlers, function(handler) {
@@ -214,6 +223,9 @@
     // The options object can contain `trigger: true` if you wish to have the
     // route callback be fired (not usually desirable), or `replace: true`, if
     // you wish to modify the current URL without adding an entry to the history.
+    /*
+    *导航
+    **/
     navigate: function(fragment, options) {
       if (!History.started) return false;
       if (!options || options === true) options = {trigger: !!options};
@@ -255,6 +267,9 @@
 
     // Update the hash location, either replacing the current entry, or adding
     // a new one to the browser history.
+    /*
+    *当增加一个新的链接，或者更改当前链接的状态时，更新hash表(内部方法)
+    **/
     _updateHash: function(location, fragment, replace) {
       if (replace) {
         var href = location.href.replace(/(javascript:|#).*$/, '');

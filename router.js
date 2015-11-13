@@ -3,9 +3,6 @@
 
   // Routers map faux-URLs to actions, and fire events when routes are
   // matched. Creating a new one sets its `routes` hash, if not set statically.
-  /*
-  *Router构造函数
-  **/
   var Router = Backbone.Router = function(options) {
     options || (options = {});
     if (options.routes) this.routes = options.routes;
@@ -15,25 +12,16 @@
 
   // Cached regular expressions for matching named param parts and splatted
   // parts of route strings.
-  /*
-  *缓存正则表达式
-  **/
   var optionalParam = /\((.*?)\)/g;
   var namedParam    = /(\(\?)?:\w+/g;
   var splatParam    = /\*\w+/g;
   var escapeRegExp  = /[\-{}\[\]+?.,\\\^$|#\s]/g;
 
   // Set up all inheritable **Backbone.Router** properties and methods.
-  /*
-  *设置prototype属性
-  **/
   _.extend(Router.prototype, Events, {
 
     // Initialize is an empty function by default. Override it with your own
     // initialization logic.
-    /*
-    *初始化方法
-    **/
     initialize: function(){},
 
     // Manually bind a single named route to a callback. For example:
@@ -42,10 +30,6 @@
     //       ...
     //     });
     //
-    /*
-    *给一个路由绑定一个callback
-    *当路由匹配时，触发callback
-    **/
     route: function(route, name, callback) {
       if (!_.isRegExp(route)) route = this._routeToRegExp(route);
       if (_.isFunction(name)) {
@@ -67,9 +51,6 @@
 
     // Execute a route handler with the provided parameters.  This is an
     // excellent place to do pre-route setup or post-route cleanup.
-    /*
-    *
-    **/
     execute: function(callback, args, name) {
       if (callback) callback.apply(this, args);
     },
@@ -83,9 +64,6 @@
     // Bind all defined routes to `Backbone.history`. We have to reverse the
     // order of the routes here to support behavior where the most general
     // routes can be defined at the bottom of the route map.
-    /*
-    *绑定路由
-    **/
     _bindRoutes: function() {
       if (!this.routes) return;
       this.routes = _.result(this, 'routes');
